@@ -69,10 +69,8 @@ module.exports = {
                         });
 
                         blobContainers.data.forEach(function(blob) {
-                            if (blob.defaultEncryptionScope && cmkEncryptionScopes.includes(blob.defaultEncryptionScope)) {
-                                helpers.addResult(results, 0, 'Blob container has CMK encryption enabled via container-level encryption scope', location, blob.id);
-                            } else if (accountLevelCMK) {
-                                helpers.addResult(results, 0, 'Blob container has CMK encryption enabled via storage account-level configuration', location, blob.id);
+                            if ((blob.defaultEncryptionScope && cmkEncryptionScopes.includes(blob.defaultEncryptionScope)) || accountLevelCMK) {
+                                helpers.addResult(results, 0, 'Blob container has CMK encryption enabled', location, blob.id);
                             } else {
                                 helpers.addResult(results, 2, 'Blob container does not have CMK encryption enabled', location, blob.id);
                             }

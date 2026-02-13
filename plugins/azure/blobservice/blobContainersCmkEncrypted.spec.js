@@ -12,10 +12,7 @@ const storageAccounts = [
         'location': 'eastus',
         'name': 'acc',
         'allowBlobPublicAccess': false
-    }
-];
-
-const storageAccountsWithCMK = [
+    },
     {
         id: '/subscriptions/123/resourceGroups/aqua-resource-group/providers/Microsoft.Storage/storageAccounts/acc',
         location: 'eastus',
@@ -240,11 +237,11 @@ describe('blobContainersCmkEncrypted', function() {
         });
 
         it('should give passing result if Blob container inherits CMK from storage account level',function(done){
-            const cache=createCache(storageAccountsWithCMK,[blobContainers[0]],[])
+            const cache=createCache([storageAccounts[2]],[blobContainers[0]],[])
             blobContainersCmkEncrypted.run(cache, {}, (err,results) => {
                 expect(results.length).to.equal(1);
                 expect(results[0].status).to.equal(0);
-                expect(results[0].message).to.include('storage account-level configuration');
+                expect(results[0].message).to.include('Blob container has CMK encryption enabled');
                 expect(results[0].region).to.equal('eastus');
                 done();
             })
