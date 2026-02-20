@@ -1270,6 +1270,13 @@ var postcalls = {
             properties: ['id'],
             url: 'https://management.azure.com/{id}/networkRuleSets/default?api-version=2022-10-01-preview'
         }
+    },
+    serviceBus: {
+        getNamespaceNetworkRuleSet: {
+            reliesOnPath: 'serviceBus.listNamespacesBySubscription',
+            properties: ['id'],
+            url: 'https://management.azure.com/{id}/networkRuleSets/default?api-version=2021-11-01'
+        }
     }
 };
 
