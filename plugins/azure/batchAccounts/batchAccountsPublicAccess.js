@@ -78,7 +78,8 @@ module.exports = {
                     }
                     
                     // Both Account Access and Node Management Access must be restricted for it to be NOT public
-                    if (accountAccessRestricted && nodeManagementAccessRestricted) {
+                    // Or if Node Management Access is not configured, consider it restricted
+                    if (accountAccessRestricted && (nodeManagementAccessRestricted || !nodeManagementAccess)) {
                         isPublic = false;
                     }
 
